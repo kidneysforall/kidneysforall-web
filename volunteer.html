@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer & Advocate | Kidneys For All</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { color: #2c3e50; line-height: 1.6; background-color: #f8fafc; }
+        header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 20px; }
+        .logo { font-size: 24px; font-weight: bold; color: #0d9488; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .back-link { text-decoration: none; color: #64748b; font-weight: 500; }
+        .lang-selectors { display: flex; gap: 8px; border-left: 1px solid #e2e8f0; padding-left: 15px; font-size: 14px; align-items: center; }
+        .lang-switch { cursor: pointer; color: #64748b; text-decoration: none; font-weight: bold; background: none; border: none; font: inherit; padding: 0; }
+        .lang-switch:hover, .lang-switch.active { color: #0d9488; text-decoration: underline; }
+        .container { max-width: 1100px; margin: 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        .info-side h1 { font-size: 36px; color: #1e293b; margin-bottom: 20px; }
+        .info-side p { color: #475569; font-size: 18px; margin-bottom: 30px; }
+        .form-side { background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #334155; font-size: 14px; }
+        input[type="text"], input[type="email"], select { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 16px; color: #334155; background-color: #ffffff; }
+        input:focus, select:focus { border-color: #0d9488; outline: none; box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15); }
+        .btn-submit { background-color: #f59e0b; color: #1e293b; border: none; padding: 14px 20px; font-size: 16px; font-weight: bold; border-radius: 25px; cursor: pointer; width: 100%; transition: background-color 0.3s; }
+        .btn-submit:hover { background-color: #d97706; }
+        #statusMessage { margin-top: 20px; font-weight: bold; text-align: center; font-size: 15px; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; gap: 30px; margin: 30px auto; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" data-i18n="brand">Kidneys For All</a>
+            <div class="nav-right">
+                <a href="index.html" class="back-link" data-i18n="back_home_short">← Back to Home</a>
+                <div class="lang-selectors">
+                    <button class="lang-switch" data-lang="en">EN</button>
+                    <span>|</span>
+                    <button class="lang-switch" data-lang="es">ES</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="info-side">
+            <h1 data-i18n="vol_title">Join the Core Care Circle Network</h1>
+            <p data-i18n="vol_subtitle">Your advocacy helps construct decoupled healthcare networks. Register your specialized capabilities profile to automatically trigger intersection matching algorithms for regional support circles.</p>
+        </div>
+
+        <div class="form-side">
+            <form id="volunteerRegForm">
+                <div class="form-group">
+                    <label for="volunteer-name" data-i18n="lbl_fullname">Full Name</label>
+                    <input type="text" id="volunteer-name" placeholder="John Smith" required>
+                </div>
+                <div class="form-group">
+                    <label for="volunteer-email" data-i18n="lbl_email">Email Address</label>
+                    <input type="email" id="volunteer-email" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="volunteer-phone" data-i18n="lbl_phone">Telephone Number</label>
+                    <input type="text" id="volunteer-phone" placeholder="(520) 555-0199" required>
+                </div>
+                <div class="form-group">
+                    <label for="roleInterest" data-i18n="lbl_track">Primary Capability Track</label>
+                    <select id="roleInterest">
+                        <option value="companion" data-i18n="opt_companion">Patient Peer Companion</option>
+                        <option value="driver" data-i18n="opt_driver">Logistics & Transport Driver</option>
+                        <option value="advocate" data-i18n="opt_advocate">Digital Community Advocate</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit" data-i18n="btn_submit_vol">Submit Registration</button>
+            </form>
+            <p id="statusMessage"></p>
+        </div>
+    </div>
+
+    <script type="module" src="./js/i18n.js"></script>
+    <script type="module">
+        // Submit form data collection handler using the explicit Data API config
+        document.getElementById('volunteerRegForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const status = document.getElementById('statusMessage');
+            status.style.color = "#475569";
+            status.innerText = "...";
+
+            // Helper to generate a compliant item ID required by Cosmos DB
+            const generatedId = 'vol_' + Math.random().toString(36).substring(2, 11);
+
+            // Constructing the GraphQL mutation mapping matching the config entity: "Item"
+            const graphqlMutation = {
+                query: `
+                    mutation createRecord($item: CreateItemInput!) {
+                        createItem(item: $item) {
+                            id
+                            fullName
+                            email
+                        }
+                    }
+                `,
+                variables: {
+                    item: {
+                        id: generatedId,
+                        docType: "volunteer",
+                        fullName: document.getElementById('volunteer-name').value.trim(),
+                        email: document.getElementById('volunteer-email').value.trim(),
+                        phone: document.getElementById('volunteer-phone').value.trim(),
+                        message: `Capability Track: ${document.getElementById('roleInterest').value}`,
+                        status: "Active",
+                        timestamp: new Date().toISOString()
+                    }
+                }
+            };
+
+            try {
+                // Route directly to the built-in static web apps data pipeline
+                const response = await fetch('/data-api/graphql', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(graphqlMutation)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok && !result.errors) {
+                    status.style.color = "#0d9488";
+                    status.innerText = "✓ Verified & Logged.";
+                    document.getElementById('volunteerRegForm').reset();
+                } else {
+                    status.style.color = "#b91c1c";
+                    const errorDetail = result.errors ? result.errors[0].message : "Database Execution Rejected";
+                    status.innerText = "Error: " + errorDetail;
+                }
+            } catch (err) {
+                status.style.color = "#b91c1c";
+                status.innerText = "Connection Error.";
+            }
+        });
+
+        // Programmatic Language Toggle Action Wireup
+        document.querySelectorAll('.lang-switch').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const targetLang = e.target.getAttribute('data-lang');
+                localStorage.setItem('preferredLanguage', targetLang);
+                window.location.reload();
+            });
+            
+            // Highlight current locale selection
+            const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (button.getAttribute('data-lang') === currentLang) {
+                button.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
