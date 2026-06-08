@@ -1,0 +1,26 @@
+{
+  "$schema": "https://dataapibuilder.azureedge.net/schemas/v1.0.0-rc/dab.seachschema.json",
+  "entities": {
+    "Item": {
+      "source": "users",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": ["create", "read"]
+        }
+      ],
+      "mappings": {
+        
+ 	"docType": "docType",
+    	"fullName": "fullName",
+    	"email": "email",
+    	"phone": "phone",
+    	"message": "message",
+    	"id": "id",
+    	"timestamp": "timestamp",
+    	"status": "status"
+
+      }
+    }
+  }
+}
