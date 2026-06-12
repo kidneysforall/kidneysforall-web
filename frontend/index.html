@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidneys For All | Nobody Faces Kidney Disease Alone</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { color: #2c3e50; line-height: 1.6; background-color: #fdfefe; }
+        header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+        .logo { font-size: 20px; font-weight: bold; color: #0d9488; text-decoration: none; display: flex; align-items: center; gap: 6px; }
+        .nav-links { display: flex; gap: 25px; list-style: none; align-items: center; }
+        .nav-links a { text-decoration: none; color: #475569; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #0d9488; }
+        
+        /* Language Selector UI Styles */
+        .lang-selectors { display: flex; gap: 8px; border-left: 1px solid #e2e8f0; padding-left: 15px; font-size: 14px; align-items: center; }
+        .lang-switch { cursor: pointer; color: #64748b; text-decoration: none; font-weight: bold; }
+        .lang-switch:hover, .lang-switch.active { color: #0d9488; text-decoration: underline; }
+        
+        .hero { background: linear-gradient(135deg, #0f766e 0%, #115e59 100%); color: #ffffff; padding: 100px 20px; text-align: center; }
+        .hero-container { max-width: 800px; margin: 0 auto; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+        .hero p { font-size: 20px; margin-bottom: 40px; color: #ccfbf1; }
+        .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-block; padding: 14px 28px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 16px; transition: background-color 0.3s; }
+        .btn-primary { background-color: #f59e0b; color: #1e293b; }
+        .btn-primary:hover { background-color: #d97706; }
+        .btn-secondary { background-color: transparent; color: #ffffff; border: 2px solid #ffffff; }
+        .btn-secondary:hover { background-color: rgba(255, 255, 255, 0.1); }
+        .mission-pillars { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 32px; color: #0f172a; margin-bottom: 15px; font-weight: 700; }
+        .section-subtitle { text-align: center; color: #64748b; max-width: 600px; margin: 0 auto 50px auto; font-size: 16px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .card { background-color: #ffffff; padding: 40px 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card-icon { font-size: 36px; color: #0d9488; margin-bottom: 20px; }
+        .card h3 { font-size: 20px; color: #1e293b; margin-bottom: 12px; }
+        .card p { color: #475569; font-size: 15px; }
+        .cta-banner { background-color: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 80px 20px; text-align: center; }
+        .cta-container { max-width: 700px; margin: 0 auto; }
+        .cta-banner h2 { font-size: 32px; color: #0f172a; margin-bottom: 15px; }
+        .cta-banner p { color: #475569; font-size: 16px; margin-bottom: 30px; }
+        footer { background-color: #0f172a; color: #94a3b8; padding: 60px 20px 20px 20px; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; margin-bottom: 40px; }
+        .footer-section h4 { color: #f8fafc; font-size: 16px; margin-bottom: 20px; text-transform: uppercase; }
+        .footer-section p { font-size: 14px; line-height: 1.6; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 12px; }
+        .footer-section ul a { color: #94a3b8; text-decoration: none; font-size: 14px; }
+        .footer-section ul a:hover { color: #38bdf8; }
+        .copyright { max-width: 1200px; margin: 0 auto; padding-top: 20px; border-top: 1px solid #334155; font-size: 13px; text-align: center; }
+        @media (max-width: 768px) { .grid-3 { grid-template-columns: 1fr; } .footer-container { grid-template-columns: 1fr; gap: 30px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" class="logo" data-i18n="brand">🤝 Kidneys For All</a>
+            <ul class="nav-links">
+                <li><a href="need-support.html" data-i18n="nav_support">Get Support</a></li>
+                <li><a href="volunteer.html" data-i18n="nav_volunteer">Volunteer Registry</a></li>
+                <li><a href="resources.html" data-i18n="nav_resources">Resources</a></li>
+                <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                <li class="lang-selectors">
+                    <button class="lang-switch" data-lang="en" style="background:none; border:none; font:inherit; padding:0;">EN</button>
+                    <span>|</span>
+                    <button class="lang-switch" data-lang="es" style="background:none; border:none; font:inherit; padding:0;">ES</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-container">
+                <h1 data-i18n="hero_title">Nobody Should Navigate Kidney Disease Alone.</h1>
+                <p data-i18n="hero_subtitle">We build community networks, match localized treatment companions, and organize grassroots advocacy loops for chronic kidney patients handling complex recovery cycles.</p>
+                <div class="hero-buttons">
+                    <a href="need-support.html" class="btn btn-primary" data-i18n="btn_need_support">I Need Social Support</a>
+                    <a href="volunteer.html" class="btn btn-secondary" data-i18n="btn_want_volunteer">I Want to Volunteer / Advocate</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="mission-pillars">
+            <h2 class="section-title" data-i18n="pillar_title">Our Social Infrastructure Channels</h2>
+            <p class="section-subtitle" data-i18n="pillar_subtitle">Clinical treatment handles the physical disease, but patients still require robust, boots-on-the-ground support pods to manage daily logic and maintain emotional health.</p>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">🦺</div>
+                    <h3 data-i18n="card1_title">Treatment Companions</h3>
+                    <p data-i18n="card1_text">We match screened local volunteers with patients to assist with medical transportation, sit with them through lengthy dialysis sessions, or provide essential presence during difficult clinical visits.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📢</div>
+                    <h3 data-i18n="card2_title">Grassroots Advocacy</h3>
+                    <p data-i18n="card2_text">Navigating donor campaigns can feel impossible when dealing with chronic fatigue. Our advocates build awareness pools and share patient stories safely to assist in finding living kidney donors.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🧺</div>
+                    <h3 data-i18n="card3_title">Localized Care Pods</h3>
+                    <p data-i18n="card3_text">Organizing logistical support networks to help with post-op grocery drop-offs, prescription delivery, and house check-ins so patients can focus completely on physical recovery.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-banner">
+            <div class="cta-container">
+                <h2 class="cta_title" data-i18n="cta_title">Be the Safety Net Someone Desperately Needs</h2>
+                <p data-i18n="cta_text" data-i18n="cta_text">Whether you can spare a few hours a week to drive a patient to local appointments, help build a digital donor search campaign, or support someone's post-op recovery timeline, there is a vital role for you inside our network.</p>
+                <div class="hero-buttons">
+                    <a href="volunteer.html" class="btn btn-primary" data-i18n="cta_btn">Register with Us Today</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4 id="runtime-brand-title">KidneysForAll.org</h4>
+                <p data-i18n="footer_about">A community-driven platform focused entirely on providing social infrastructure, connection, and grassroots advocacy for kidney patients navigating chronic illness without a traditional localized support system.</p>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="footer_systems_header">Support Systems</h4>
+                <ul>
+                    <li><a href="need-support.html" data-i18n="nav_support_alt">Request a Companion</a></li>
+                    <li><a href="volunteer.html" data-i18n="nav_volunteer_alt">Volunteer Training</a></li>
+                    <li><a href="resources.html" data-i18n="nav_resources_alt">Educational Resources</a></li>
+                    <li><a href="join-circle.html" data-i18n="nav_circle_alt">General Form / Inquiries</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="nav_contact">Contact & Info</h4>
+                <p>Email: <a href="" id="runtime-email" style="color: #38bdf8; text-decoration: none;"></a></p>
+                <p>Phone: <a href="" id="runtime-phone" style="color: #38bdf8; text-decoration: none;"></a></p>
+            </div>
+        </div>
+        <div class="copyright">&copy; 2026 Kidneys For All. All rights reserved.</div>
+    </footer>
+
+    <script type="module" src="./js/i18n.js"></script>
+    
+    <script type="module">
+        import { APP_CONFIG } from './js/config.js';
+        
+        // Populate the programmatic communication channels
+        const emailEl = document.getElementById('runtime-email');
+        const phoneEl = document.getElementById('runtime-phone');
+        
+        if (emailEl) {
+            emailEl.innerText = APP_CONFIG.EMAIL;
+            emailEl.href = `mailto:${APP_CONFIG.EMAIL}`;
+        }
+        
+        if (phoneEl) {
+            phoneEl.innerText = APP_CONFIG.TELEPHONE;
+            phoneEl.href = `tel:${APP_CONFIG.TELEPHONE.replace(/\D/g,'')}`;
+        }
+
+        // Ensure title reflects clean identity from config
+        const brandTitle = document.getElementById('runtime-brand-title');
+        if (brandTitle && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            brandTitle.innerText = window.location.hostname.toLowerCase();
+        }
+
+        // Programmatic Language Switch Trigger Wireup
+        document.querySelectorAll('.lang-switch').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const targetLang = e.target.getAttribute('data-lang');
+                localStorage.setItem('preferredLanguage', targetLang);
+                
+                // Force global i18n update if script exposes it, or cleanly reload context
+                window.location.reload();
+            });
+            
+            // Apply visual active focus layout based on cached state
+            const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (button.getAttribute('data-lang') === currentLang) {
+                button.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

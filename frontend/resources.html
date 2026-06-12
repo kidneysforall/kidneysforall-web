@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational & Patient Resources | Kidneys For All</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { color: #2c3e50; line-height: 1.6; background-color: #fdfefe; }
+        header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+        .logo { font-size: 20px; font-weight: bold; color: #0d9488; text-decoration: none; display: flex; align-items: center; gap: 6px; }
+        .nav-links { display: flex; gap: 25px; list-style: none; align-items: center; }
+        .nav-links a { text-decoration: none; color: #475569; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #0d9488; }
+        
+        /* Language Selector UI Styles */
+        .lang-selectors { display: flex; gap: 8px; border-left: 1px solid #e2e8f0; padding-left: 15px; font-size: 14px; align-items: center; }
+        .lang-switch { cursor: pointer; color: #64748b; text-decoration: none; font-weight: bold; }
+        .lang-switch:hover, .lang-switch.active { color: #0d9488; text-decoration: underline; }
+        
+        .resources-hero { background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%); color: #ffffff; padding: 60px 20px; text-align: center; }
+        .hero-inner { max-width: 800px; margin: 0 auto; }
+        .hero-inner h1 { font-size: 36px; margin-bottom: 15px; }
+        .hero-inner p { font-size: 18px; opacity: 0.9; }
+        main { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title { font-size: 24px; color: #1e293b; margin: 40px 0 20px 0; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+        .section-title:first-of-type { margin-top: 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; }
+        .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); transition: transform 0.3s, box-shadow 0.3s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        .card h3 { color: #0f766e; font-size: 18px; margin-bottom: 10px; }
+        .card p { color: #475569; font-size: 15px; margin-bottom: 20px; }
+        .resource-link { display: inline-block; color: #f59e0b; text-decoration: none; font-weight: bold; font-size: 15px; transition: color 0.2s; }
+        .resource-link:hover { color: #d97706; }
+        .disclaimer-box { background-color: #f8fafc; border-left: 4px solid #64748b; padding: 20px; border-radius: 0 8px 8px 0; margin: 50px 0; font-size: 14px; color: #475569; }
+        footer { background-color: #1e293b; color: #cbd5e1; padding: 60px 20px 20px 20px; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; padding-bottom: 40px; }
+        .footer-section h4 { color: #ffffff; margin-bottom: 20px; font-size: 16px; }
+        .footer-section p { font-size: 14px; line-height: 1.8; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 12px; }
+        .footer-section ul a { color: #cbd5e1; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .footer-section ul a:hover { color: #f59e0b; }
+        .copyright { max-width: 1200px; margin: 0 auto; padding-top: 20px; border-top: 1px solid #334155; font-size: 13px; text-align: center; color: #64748b; }
+        @media (max-width: 768px) { .nav-container { flex-direction: column; gap: 15px; } .container, .footer-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" data-i18n="brand">Kidneys For All</a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+                <li><a href="need-support.html" data-i18n="nav_support">Request Support</a></li>
+                <li><a href="volunteer.html" data-i18n="nav_volunteer">Volunteer Registry</a></li>
+                <li><a href="resources.html" style="color: #0d9488;" data-i18n="nav_resources">Resources</a></li>
+                <li class="lang-selectors">
+                    <button class="lang-switch" data-lang="en" style="background:none; border:none; font:inherit; padding:0;">EN</button>
+                    <span>|</span>
+                    <button class="lang-switch" data-lang="es" style="background:none; border:none; font:inherit; padding:0;">ES</button>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="resources-hero">
+        <div class="hero-inner">
+            <h1 data-i18n="res_title">Educational & Patient Resources</h1>
+            <p data-i18n="res_subtitle">Access critical national toolkits, clinical registries, and organizational frameworks to help navigate chronic illness and transplantation pathways.</p>
+        </div>
+    </section>
+
+    <main>
+        <h2 class="section-title" data-i18n="sec_orgs">Major National Kidney Organizations</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>National Kidney Foundation (NKF)</h3>
+                <p>The leading organization dedicated to the awareness, prevention, and treatment of kidney disease. Provides extensive patient materials, dietary paths, and local support chapters.</p>
+                <a href="https://www.kidney.org" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> kidney.org →</a>
+            </div>
+            <div class="card">
+                <h3>American Kidney Fund (AKF)</h3>
+                <p>Provides direct financial assistance to dialysis patients and transplant recipients, alongside extensive public health education resources and advocacy platforms.</p>
+                <a href="https://www.kidneyfund.org" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> kidneyfund.org →</a>
+            </div>
+        </div>
+
+        <h2 class="section-title" data-i18n="sec_transplant">Transplantation & Organ Registries</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>United Network for Organ Sharing (UNOS)</h3>
+                <p>The private, non-profit organization that manages the United States organ transplant system under contract with the federal government. Essential for understanding waiting list allocations.</p>
+                <a href="https://unos.org" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> unos.org →</a>
+            </div>
+            <div class="card">
+                <h3>Scientific Registry of Transplant Recipients (SRTR)</h3>
+                <p>Provides comprehensive data evaluation and reports regarding transplant center performance metrics, waitlist statistics, and organ survival outcomes nationwide.</p>
+                <a href="https://www.srtr.org" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> srtr.org →</a>
+            </div>
+            <div class="card">
+                <h3>National Kidney Registry (NKR)</h3>
+                <p>An organization dedicated to increasing the quality, speed, and number of living donor kidney transplants through advanced paired kidney exchange programming frameworks.</p>
+                <a href="https://www.kidneyregistry.org" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> kidneyregistry.org →</a>
+            </div>
+        </div>
+
+        <h2 class="section-title" data-i18n="sec_gov">Government & Clinical Data Centers</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>NIDDK (NIH)</h3>
+                <p>The National Institute of Diabetes and Digestive and Kidney Diseases conducts and supports comprehensive medical research to help explain health and disease metrics.</p>
+                <a href="https://www.niddk.nih.gov" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> niddk.nih.gov →</a>
+            </div>
+            <div class="card">
+                <h3>Medicare (ESRD Program Information)</h3>
+                <p>Official federal data guidelines explaining health insurance parameters and specialized coverage qualifications tailored for patients navigating End-Stage Renal Disease.</p>
+                <a href="https://www.medicare.gov" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> medicare.gov →</a>
+            </div>
+        </div>
+
+        <div class="disclaimer-box">
+            <strong data-i18n="disclaimer_title">Medical Disclaimer Notice:</strong><span data-i18n="disclaimer_text"> The third-party resources and data curated above are provided strictly for educational informational purposes. This organization does not offer medical advice, diagnostic paths, or clinical treatments. Always consult directly with a qualified healthcare provider or nephrologist regarding specific clinical care frameworks.</span>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>KidneysForAll.org</h4>
+                <p data-i18n="footer_desc">A national community focused entirely on providing social infrastructure, connection, and grassroots advocacy for kidney patients navigating chronic illness without a traditional support system.</p>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="footer_systems">Support Systems</h4>
+                <ul>
+                    <li><a href="need-support.html" data-i18n="footer_companion">Request a Companion</a></li>
+                    <li><a href="volunteer.html" data-i18n="footer_training">Volunteer Training</a></li>
+                    <li><a href="resources.html" data-i18n="footer_edu">Educational Resources</a></li>
+                    <li><a href="join-circle.html" data-i18n="footer_inquiries">General Form / Inquiries</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="nav_contact">Contact & Info</h4>
+                <p>Email: <a href="" id="runtime-email" style="color: #f59e0b; text-decoration: none;"></a></p>
+                <p>Phone: <a href="" id="runtime-phone" style="color: #f59e0b; text-decoration: none;"></a></p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Kidneys For All. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Core Translation Module Loader -->
+    <script type="module" src="./js/i18n.js"></script>
+    <script type="module">
+        import { APP_CONFIG } from './js/config.js';
+        
+        // Populate communication strings with clickable links
+        const emailEl = document.getElementById('runtime-email');
+        const phoneEl = document.getElementById('runtime-phone');
+        
+        if (emailEl) {
+            emailEl.innerText = APP_CONFIG.EMAIL;
+            emailEl.href = `mailto:${APP_CONFIG.EMAIL}`;
+        }
+        
+        if (phoneEl) {
+            phoneEl.innerText = APP_CONFIG.TELEPHONE;
+            phoneEl.href = `tel:${APP_CONFIG.TELEPHONE.replace(/\D/g,'')}`;
+        }
+
+        // Programmatic Language Toggle Action Wireup
+        document.querySelectorAll('.lang-switch').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const targetLang = e.target.getAttribute('data-lang');
+                localStorage.setItem('preferredLanguage', targetLang);
+                window.location.reload();
+            });
+            
+            // Highlight current locale selection
+            const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (button.getAttribute('data-lang') === currentLang) {
+                button.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
