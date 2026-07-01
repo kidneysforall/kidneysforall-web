@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos DB Data Reader</title>
+    <script src="https://cdn.jsdelivr.net/npm/@azure/cosmos@3.19.0/dist/index.min.js"></script>
+</head>
+<body>
+
+    <h1>Cosmos DB Data Items</h1>
+    <button id="load-btn">Fetch Data</button>
+    
+    <div id="output" style="margin-top: 20px; white-space: pre-wrap; font-family: monospace;"></div>
+
+    <script>
+        // 1. Configuration (Replace with your actual Azure credentials)
+        const connectionString = "AccountEndpoint=https://kidneysforall-db.documents.azure.com:443/;AccountKey=h2zNw7jIUcVBERwVJV0ARWriLA7F8JohqtRZ9ENZaDmxbkNJifZPXb3CytYzKxR4Bu0EIPu5SU1jACDbOZUEkA==;";
+        const databaseId = "kidneysforall";
+        const containerId = "users";
+
+        document.getElementById('load-btn').addEventListener('click', async () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.textContent = "Loading data...";
+
+            try {
+                // 2. Initialize the Cosmos Client using the connection string
+                const client = typeof Cosmos !== 'undefined' 
+                    ? new Cosmos.CosmosClient(connectionString) // Standard CDN global name
+                    : new Azure.Cosmos.CosmosClient(connectionString); // Fallback variant
+                
+                const database = client.database(databaseId);
+                const container = database.container(containerId);
+
+                // 3. Define a simple query to fetch all items
+                const querySpec = {
+                    query: "SELECT * FROM c"
+                };
+
+                // 4. Execute the query
+                const { resources: items } = await container.items.query(querySpec).fetchAll();
+
+                // 5. Render the results to the page
+                if (items.length === 0) {
+                    outputDiv.textContent = "No items found in the container.";
+                    return;
+                }
+
+                outputDiv.textContent = JSON.stringify(items, null, 2);
+
+            } catch (error) {
+                console.error("Error fetching data from Cosmos DB:", error);
+                outputDiv.textContent = `Error: ${error.message}\n\nCheck the browser console for more details.`;
+            }
+        });
+    </script>
+</body>
+</html>
