@@ -19,40 +19,45 @@
         const databaseId = "kidneysforall";
         const containerId = "users";
 
-        document.getElementById('load-btn').addEventListener('click', async () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.textContent = "Loading data...";
+document.getElementById('load-btn').addEventListener('click', async () => {
+        const outputDiv = document.getElementById('output');
+        outputDiv.textContent = "Loading data...";
 
-            try {
-                // 2. Initialize the Cosmos Client using the connection string
-                const client = typeof Cosmos !== 'undefined' 
-                    ? new Cosmos.CosmosClient(connectionString) // Standard CDN global name
-                    : new Azure.Cosmos.CosmosClient(connectionString); // Fallback variant
-                
-                const database = client.database(databaseId);
-                const container = database.container(containerId);
-
-                // 3. Define a simple query to fetch all items
-                const querySpec = {
-                    query: "SELECT * FROM c"
-                };
-
-                // 4. Execute the query
-                const { resources: items } = await container.items.query(querySpec).fetchAll();
-
-                // 5. Render the results to the page
-                if (items.length === 0) {
-                    outputDiv.textContent = "No items found in the container.";
-                    return;
-                }
-
-                outputDiv.textContent = JSON.stringify(items, null, 2);
-
-            } catch (error) {
-                console.error("Error fetching data from Cosmos DB:", error);
-                outputDiv.textContent = `Error: ${error.message}\n\nCheck the browser console for more details.`;
+        try {
+            // 2. Foolproof Initialization for the CDN SDK
+            let client;
+            if (typeof Cosmos !== 'undefined' && Cosmos.CosmosClient) {
+                client = new Cosmos.CosmosClient(connectionString);
+            } else if (typeof AzureCosmos !== 'undefined' && AzureCosmos.CosmosClient) {
+                client = new AzureCosmos.CosmosClient(connectionString);
+            } else if (typeof Azure !== 'undefined' && Azure.Cosmos && Azure.Cosmos.CosmosClient) {
+                client = new Azure.Cosmos.CosmosClient(connectionString);
+            } else {
+                throw new Error("Cosmos DB SDK failed to load properly from the CDN or namespace mismatch.");
             }
-        });
-    </script>
-</body>
-</html>
+            
+            const database = client.database(databaseId);
+            const container = database.container(containerId);
+
+            // 3. Define a simple query to fetch all items
+            const querySpec = {
+                query: "SELECT * FROM c"
+            };
+
+            // 4. Execute the query
+            const { resources: items } = await container.items.query(querySpec).fetchAll();
+
+            // 5. Render the results to the page
+            if (items.length === 0) {
+                outputDiv.textContent = "No items found in the container.";
+                return;
+            }
+
+            outputDiv.textContent = JSON.stringify(items, null, 2);
+
+        } catch (error) {
+            console.error("Error fetching data from Cosmos DB:", error);
+            outputDiv.textContent = `Error: ${error.message}\n\nCheck the browser console for more details.`;
+        }
+    });
+</script>
