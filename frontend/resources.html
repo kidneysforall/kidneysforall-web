@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educational & Patient Resources | Kidneys For All</title>
+    <title data-i18n="meta_title">Educational & Patient Resources | Kidneys For All</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { color: #2c3e50; line-height: 1.6; background-color: #fdfefe; }
@@ -14,9 +14,8 @@
         .nav-links a { text-decoration: none; color: #475569; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: #0d9488; }
         
-        /* Language Selector UI Styles */
         .lang-selectors { display: flex; gap: 8px; border-left: 1px solid #e2e8f0; padding-left: 15px; font-size: 14px; align-items: center; }
-        .lang-switch { cursor: pointer; color: #64748b; text-decoration: none; font-weight: bold; }
+        .lang-switch { cursor: pointer; color: #64748b; text-decoration: none; font-weight: bold; background: none; border: none; font: inherit; padding: 0; }
         .lang-switch:hover, .lang-switch.active { color: #0d9488; text-decoration: underline; }
         
         .resources-hero { background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%); color: #ffffff; padding: 60px 20px; text-align: center; }
@@ -57,9 +56,9 @@
                 <li><a href="volunteer.html" data-i18n="nav_volunteer">Volunteer Registry</a></li>
                 <li><a href="resources.html" style="color: #0d9488;" data-i18n="nav_resources">Resources</a></li>
                 <li class="lang-selectors">
-                    <button class="lang-switch" data-lang="en" style="background:none; border:none; font:inherit; padding:0;">EN</button>
+                    <button class="lang-switch" data-lang="en">EN</button>
                     <span>|</span>
-                    <button class="lang-switch" data-lang="es" style="background:none; border:none; font:inherit; padding:0;">ES</button>
+                    <button class="lang-switch" data-lang="es">ES</button>
                 </li>
             </ul>
         </div>
@@ -76,13 +75,13 @@
         <h2 class="section-title" data-i18n="sec_orgs">Major National Kidney Organizations</h2>
         <div class="grid">
             <div class="card">
-                <h3>National Kidney Foundation (NKF)</h3>
-                <p>The leading organization dedicated to the awareness, prevention, and treatment of kidney disease. Provides extensive patient materials, dietary paths, and local support chapters.</p>
+                <h3 data-i18n="card_nkf_title">National Kidney Foundation (NKF)</h3>
+                <p data-i18n="card_nkf_desc">The leading organization dedicated to the awareness, prevention, and treatment of kidney disease. Provides extensive patient materials, dietary paths, and local support chapters.</p>
                 <a href="https://www.kidney.org" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> kidney.org →</a>
             </div>
             <div class="card">
-                <h3>American Kidney Fund (AKF)</h3>
-                <p>Provides direct financial assistance to dialysis patients and transplant recipients, alongside extensive public health education resources and advocacy platforms.</p>
+                <h3 data-i18n="card_akf_title">American Kidney Fund (AKF)</h3>
+                <p data-i18n="card_akf_desc">Provides direct financial assistance to dialysis patients and transplant recipients, alongside extensive public health education resources and advocacy platforms.</p>
                 <a href="https://www.kidneyfund.org" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> kidneyfund.org →</a>
             </div>
         </div>
@@ -90,18 +89,18 @@
         <h2 class="section-title" data-i18n="sec_transplant">Transplantation & Organ Registries</h2>
         <div class="grid">
             <div class="card">
-                <h3>United Network for Organ Sharing (UNOS)</h3>
-                <p>The private, non-profit organization that manages the United States organ transplant system under contract with the federal government. Essential for understanding waiting list allocations.</p>
+                <h3 data-i18n="card_unos_title">United Network for Organ Sharing (UNOS)</h3>
+                <p data-i18n="card_unos_desc">The private, non-profit organization that manages the United States organ transplant system under contract with the federal government. Essential for understanding waiting list allocations.</p>
                 <a href="https://unos.org" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> unos.org →</a>
             </div>
             <div class="card">
-                <h3>Scientific Registry of Transplant Recipients (SRTR)</h3>
-                <p>Provides comprehensive data evaluation and reports regarding transplant center performance metrics, waitlist statistics, and organ survival outcomes nationwide.</p>
+                <h3 data-i18n="card_srtr_title">Scientific Registry of Transplant Recipients (SRTR)</h3>
+                <p data-i18n="card_srtr_desc">Provides comprehensive data evaluation and reports regarding transplant center performance metrics, waitlist statistics, and organ survival outcomes nationwide.</p>
                 <a href="https://www.srtr.org" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> srtr.org →</a>
             </div>
             <div class="card">
-                <h3>National Kidney Registry (NKR)</h3>
-                <p>An organization dedicated to increasing the quality, speed, and number of living donor kidney transplants through advanced paired kidney exchange programming frameworks.</p>
+                <h3 data-i18n="card_nkr_title">National Kidney Registry (NKR)</h3>
+                <p data-i18n="card_nkr_desc">An organization dedicated to increasing the quality, speed, and number of living donor kidney transplants through advanced paired kidney exchange programming frameworks.</p>
                 <a href="https://www.kidneyregistry.org" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> kidneyregistry.org →</a>
             </div>
         </div>
@@ -109,19 +108,20 @@
         <h2 class="section-title" data-i18n="sec_gov">Government & Clinical Data Centers</h2>
         <div class="grid">
             <div class="card">
-                <h3>NIDDK (NIH)</h3>
-                <p>The National Institute of Diabetes and Digestive and Kidney Diseases conducts and supports comprehensive medical research to help explain health and disease metrics.</p>
+                <h3 data-i18n="card_niddk_title">NIDDK (NIH)</h3>
+                <p data-i18n="card_niddk_desc">The National Institute of Diabetes and Digestive and Kidney Diseases conducts and supports comprehensive medical research to help explain health and disease metrics.</p>
                 <a href="https://www.niddk.nih.gov" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> niddk.nih.gov →</a>
             </div>
             <div class="card">
-                <h3>Medicare (ESRD Program Information)</h3>
-                <p>Official federal data guidelines explaining health insurance parameters and specialized coverage qualifications tailored for patients navigating End-Stage Renal Disease.</p>
+                <h3 data-i18n="card_medicare_title">Medicare (ESRD Program Information)</h3>
+                <p data-i18n="card_medicare_desc">Official federal data guidelines explaining health insurance parameters and specialized coverage qualifications tailored for patients navigating End-Stage Renal Disease.</p>
                 <a href="https://www.medicare.gov" target="_blank" class="resource-link"><span data-i18n="res_visit">Visit</span> medicare.gov →</a>
             </div>
         </div>
 
         <div class="disclaimer-box">
-            <strong data-i18n="disclaimer_title">Medical Disclaimer Notice:</strong><span data-i18n="disclaimer_text"> The third-party resources and data curated above are provided strictly for educational informational purposes. This organization does not offer medical advice, diagnostic paths, or clinical treatments. Always consult directly with a qualified healthcare provider or nephrologist regarding specific clinical care frameworks.</span>
+            <strong data-i18n="disclaimer_title">Medical Disclaimer Notice:</strong>
+            <span data-i18n="disclaimer_text"> The third-party resources and data curated above are provided strictly for educational informational purposes. This organization does not offer medical advice, diagnostic paths, or clinical treatments. Always consult directly with a qualified healthcare provider or nephrologist regarding specific clinical care frameworks.</span>
         </div>
     </main>
 
@@ -142,12 +142,12 @@
             </div>
             <div class="footer-section">
                 <h4 data-i18n="nav_contact">Contact & Info</h4>
-                <p>Email: <a href="" id="runtime-email" style="color: #f59e0b; text-decoration: none;"></a></p>
-                <p>Phone: <a href="" id="runtime-phone" style="color: #f59e0b; text-decoration: none;"></a></p>
+                <p><span data-i18n="footer_email">Email</span>: <a href="" id="runtime-email" style="color: #f59e0b; text-decoration: none;"></a></p>
+                <p><span data-i18n="footer_phone">Phone</span>: <a href="" id="runtime-phone" style="color: #f59e0b; text-decoration: none;"></a></p>
             </div>
         </div>
         <div class="copyright">
-            &copy; 2026 Kidneys For All. All rights reserved.
+            <span data-i18n="footer_copy">&copy; 2026 Kidneys For All. All rights reserved.</span>
         </div>
     </footer>
 
@@ -155,8 +155,106 @@
     <script type="module" src="./js/i18n.js"></script>
     <script type="module">
         import { APP_CONFIG } from './js/config.js';
+
+        // 1. Unified Translation Dictionary
+        const translations = {
+            en: {
+                meta_title: "Educational & Patient Resources | Kidneys For All",
+                brand: "Kidneys For All",
+                nav_home: "Home",
+                nav_support: "Request Support",
+                nav_volunteer: "Volunteer Registry",
+                nav_resources: "Resources",
+                res_title: "Educational & Patient Resources",
+                res_subtitle: "Access critical national toolkits, clinical registries, and organizational frameworks to help navigate chronic illness and transplantation pathways.",
+                sec_orgs: "Major National Kidney Organizations",
+                sec_transplant: "Transplantation & Organ Registries",
+                sec_gov: "Government & Clinical Data Centers",
+                res_visit: "Visit",
+                card_nkf_title: "National Kidney Foundation (NKF)",
+                card_nkf_desc: "The leading organization dedicated to the awareness, prevention, and treatment of kidney disease. Provides extensive patient materials, dietary paths, and local support chapters.",
+                card_akf_title: "American Kidney Fund (AKF)",
+                card_akf_desc: "Provides direct financial assistance to dialysis patients and transplant recipients, alongside extensive public health education resources and advocacy platforms.",
+                card_unos_title: "United Network for Organ Sharing (UNOS)",
+                card_unos_desc: "The private, non-profit organization that manages the United States organ transplant system under contract with the federal government. Essential for understanding waiting list allocations.",
+                card_srtr_title: "Scientific Registry of Transplant Recipients (SRTR)",
+                card_srtr_desc: "Provides comprehensive data evaluation and reports regarding transplant center performance metrics, waitlist statistics, and organ survival outcomes nationwide.",
+                card_nkr_title: "National Kidney Registry (NKR)",
+                card_nkr_desc: "An organization dedicated to increasing the quality, speed, and number of living donor kidney transplants through advanced paired kidney exchange programming frameworks.",
+                card_niddk_title: "NIDDK (NIH)",
+                card_niddk_desc: "The National Institute of Diabetes and Digestive and Kidney Diseases conducts and supports comprehensive medical research to help explain health and disease metrics.",
+                card_medicare_title: "Medicare (ESRD Program Information)",
+                card_medicare_desc: "Official federal data guidelines explaining health insurance parameters and specialized coverage qualifications tailored for patients navigating End-Stage Renal Disease.",
+                disclaimer_title: "Medical Disclaimer Notice:",
+                disclaimer_text: " The third-party resources and data curated above are provided strictly for educational informational purposes. This organization does not offer medical advice, diagnostic paths, or clinical treatments. Always consult directly with a qualified healthcare provider or nephrologist regarding specific clinical care frameworks.",
+                footer_desc: "A national community focused entirely on providing social infrastructure, connection, and grassroots advocacy for kidney patients navigating chronic illness without a traditional support system.",
+                footer_systems: "Support Systems",
+                footer_companion: "Request a Companion",
+                footer_training: "Volunteer Training",
+                footer_edu: "Educational Resources",
+                footer_inquiries: "General Form / Inquiries",
+                nav_contact: "Contact & Info",
+                footer_email: "Email",
+                footer_phone: "Phone",
+                footer_copy: "© 2026 Kidneys For All. All rights reserved."
+            },
+            es: {
+                meta_title: "Recursos Educativos y para el Paciente | Kidneys For All",
+                brand: "Kidneys For All",
+                nav_home: "Inicio",
+                nav_support: "Solicitar Apoyo",
+                nav_volunteer: "Registro de Voluntarios",
+                nav_resources: "Recursos",
+                res_title: "Recursos Educativos y para el Paciente",
+                res_subtitle: "Acceda a herramientas nacionales clave, registros clínicos y marcos organizacionales para ayudar a navegar la enfermedad crónica y las vías de trasplante.",
+                sec_orgs: "Principales Organizaciones Nacionales del Riñón",
+                sec_transplant: "Trasplantes y Registros de Órganos",
+                sec_gov: "Centros de Datos Clínicos y Gubernamentales",
+                res_visit: "Visitar",
+                card_nkf_title: "Fundación Nacional del Riñón (NKF)",
+                card_nkf_desc: "La organización líder dedicada concientizar, prevenir y tratar la enfermedad renal. Ofrece abundante material para pacientes, pautas dietéticas y capítulos de apoyo local.",
+                card_akf_title: "Fondo Americano del Riñón (AKF)",
+                card_akf_desc: "Proporciona asistencia financiera directa a pacientes en diálisis y receptores de trasplantes, junto con amplios recursos de educación en salud pública y plataformas de defensa.",
+                card_unos_title: "Red Unida para el Intercambio de Órganos (UNOS)",
+                card_unos_desc: "La organización privada sin fines de lucro que administra el sistema de trasplante de órganos de los Estados Unidos bajo contrato con el gobierno federal. Esencial para comprender la asignación en la lista de espera.",
+                card_srtr_title: "Registro Científico de Receptores de Trasplantes (SRTR)",
+                card_srtr_desc: "Proporciona una evaluación exhaustiva de datos e informes sobre las métricas de rendimiento de los centros de trasplante, estadísticas de listas de espera y resultados de supervivencia de órganos en todo el país.",
+                card_nkr_title: "Registro Nacional del Riñón (NKR)",
+                card_nkr_desc: "Una organización dedicada a aumentar la calidad, velocidad y cantidad de trasplantes de riñón de donantes vivos a través de marcos avanzados de programación de intercambio de riñón emparejado.",
+                card_niddk_title: "NIDDK (NIH)",
+                card_niddk_desc: "El Instituto Nacional de Diabetes y Enfermedades Digestivas y Renales realiza y apoya investigaciones médicas integrales para ayudar a explicar las métricas de salud y enfermedad.",
+                card_medicare_title: "Medicare (Información del Programa ESRD)",
+                card_medicare_desc: "Pautas de datos oficiales del gobierno federal que explican los parámetros del seguro de salud y las calificaciones de cobertura especializada diseñadas para pacientes con Enfermedad Renal Terminal.",
+                disclaimer_title: "Aviso de Exención de Responsabilidad Médica:",
+                disclaimer_text: " Los recursos y datos de terceros seleccionados anteriormente se proporcionan estrictamente con fines informativos y educativos. Esta organización no ofrece asesoramiento médico, vías de diagnóstico ni tratamientos clínicos. Consulte siempre directamente con un proveedor de atención médica calificado o nefrólogo sobre los marcos de atención clínica específicos.",
+                footer_desc: "Una comunidad nacional enfocada enteramente en proporcionar infraestructura social, conexión y defensa comunitaria para pacientes renales que navegan por enfermedades crónicas sin un sistema de apoyo tradicional.",
+                footer_systems: "Sistemas de Apoyo",
+                footer_companion: "Solicitar un Compañero",
+                footer_training: "Capacitación de Voluntarios",
+                footer_edu: "Recursos Educativos",
+                footer_inquiries: "Formulario General / Consultas",
+                nav_contact: "Contacto e Info",
+                footer_email: "Correo electrónico",
+                footer_phone: "Teléfono",
+                footer_copy: "© 2026 Kidneys For All. Todos los derechos reservados."
+            }
+        };
+
+        // 2. Run Language Translation Logic
+        const currentLang = localStorage.getItem('preferredLanguage') || 'en';
         
-        // Populate communication strings with clickable links
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[currentLang] && translations[currentLang][key]) {
+                if (element.tagName === 'TITLE') {
+                    document.title = translations[currentLang][key];
+                } else {
+                    element.textContent = translations[currentLang][key];
+                }
+            }
+        });
+
+        // 3. Populate configuration paths smoothly
         const emailEl = document.getElementById('runtime-email');
         const phoneEl = document.getElementById('runtime-phone');
         
@@ -170,7 +268,7 @@
             phoneEl.href = `tel:${APP_CONFIG.TELEPHONE.replace(/\D/g,'')}`;
         }
 
-        // Programmatic Language Toggle Action Wireup
+        // 4. Set up interactive click actions
         document.querySelectorAll('.lang-switch').forEach(button => {
             button.addEventListener('click', (e) => {
                 const targetLang = e.target.getAttribute('data-lang');
@@ -178,8 +276,6 @@
                 window.location.reload();
             });
             
-            // Highlight current locale selection
-            const currentLang = localStorage.getItem('preferredLanguage') || 'en';
             if (button.getAttribute('data-lang') === currentLang) {
                 button.classList.add('active');
             }
