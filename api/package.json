@@ -1,0 +1,20 @@
+{
+  "name": "swa-api",
+  "version": "1.0.0",
+  "description": "Serverless API for Azure Static Web App Cosmos Reader",
+  "main": "src/functions/*.js",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "dependencies": {
+    "@azure/cosmos": "^4.2.0",
+    "@azure/functions": "^4.6.0"
+  },
+  "devDependencies": {
+    "azure-functions-core-tools": "^4.x"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
