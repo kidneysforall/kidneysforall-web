@@ -10,9 +10,9 @@
         .container { max-width: 600px; margin: 0 auto; }
         .header-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
         .back-home { color: #0d9488; text-decoration: none; font-weight: 500; }
-        .lang-selectors { display: flex; gap: 6px; font-size: 14px; }
-        .lang-switch { cursor: pointer; color: #64748b; text-decoration: none; }
-        .lang-switch:hover { color: #0d9488; }
+        .lang-selectors { display: flex; gap: 6px; font-size: 14px; align-items: center; }
+        .lang-switch { cursor: pointer; color: #64748b; text-decoration: none; font-weight: bold; background: none; border: none; font: inherit; padding: 0; }
+        .lang-switch:hover, .lang-switch.active { color: #0d9488; text-decoration: underline; }
         .form-card { background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; border-top: 4px solid #0d9488; }
         h1 { font-size: 28px; color: #1e293b; margin-bottom: 10px; }
         p.intro { color: #64748b; margin-bottom: 30px; font-size: 16px; }
@@ -20,8 +20,8 @@
         label { display: block; margin-bottom: 8px; font-weight: 600; color: #334155; font-size: 14px; }
         input[type="text"], input[type="email"], select { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 16px; color: #334155; background-color: #ffffff; }
         input:focus, select:focus { border-color: #0d9488; outline: none; box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15); }
-        button { background-color: #0d9488; color: white; border: none; padding: 14px 20px; font-size: 16px; font-weight: bold; border-radius: 25px; cursor: pointer; width: 100%; margin-top: 10px; transition: background-color 0.3s; }
-        button:hover { background-color: #0f766e; }
+        button[type="submit"] { background-color: #0d9488; color: white; border: none; padding: 14px 20px; font-size: 16px; font-weight: bold; border-radius: 25px; cursor: pointer; width: 100%; margin-top: 10px; transition: background-color 0.3s; }
+        button[type="submit"]:hover { background-color: #0f766e; }
         #statusMessage { margin-top: 20px; font-weight: bold; text-align: center; font-size: 15px; }
     </style>
 </head>
@@ -30,9 +30,9 @@
         <div class="header-wrap">
             <a href="index.html" class="back-home" data-i18n="back_home">← Back to Homepage</a>
             <div class="lang-selectors">
-                <a href="#" class="lang-switch" data-lang="en">EN</a>
+                <button class="lang-switch" data-lang="en">EN</button>
                 <span>|</span>
-                <a href="#" class="lang-switch" data-lang="es">ES</a>
+                <button class="lang-switch" data-lang="es">ES</button>
             </div>
         </div>
         <div class="form-card">
@@ -65,13 +65,11 @@
 
     <script type="module" src="./js/i18n.js"></script>
     <script type="module">
-        import { APP_CONFIG } from './js/config.js';
-
         document.getElementById('supportForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const statusMessage = document.getElementById('statusMessage');
             statusMessage.style.color = "#475569";
-            statusMessage.innerText = "...";
+            statusMessage.innerText = "Transmitting support request details...";
 
             const formData = {
                 docType: "submission",
@@ -82,7 +80,8 @@
             };
 
             try {
-                const response = await fetch(`${APP_CONFIG.BASE_URL}/api/submitForm`, {
+                // Using the standardized relative endpoint mapped directly via Azure SWA proxy
+                const response = await fetch('/api/submitForm', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
@@ -91,15 +90,30 @@
                 const result = await response.json();
                 if (response.ok) {
                     statusMessage.style.color = "#0d9488";
-                    statusMessage.innerText = "✓ Request Submitted.";
+                    statusMessage.innerText = "✓ Request Submitted Successfully.";
                     document.getElementById('supportForm').reset();
                 } else {
                     statusMessage.style.color = "#b91c1c";
-                    statusMessage.innerText = `Error: ${result.error}`;
+                    statusMessage.innerText = `Rejected: ${result.error || 'Unknown API issue.'}`;
                 }
             } catch (err) {
                 statusMessage.style.color = "#b91c1c";
-                statusMessage.innerText = "Network Error.";
+                statusMessage.innerText = "Network failure connecting to backend service.";
+            }
+        });
+
+        // Programmatic Language Toggle Action Wireup
+        document.querySelectorAll('.lang-switch').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const targetLang = e.target.getAttribute('data-lang');
+                localStorage.setItem('preferredLanguage', targetLang);
+                window.location.reload();
+            });
+            
+            // Highlight current locale selection
+            const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (button.getAttribute('data-lang') === currentLang) {
+                button.classList.add('active');
             }
         });
     </script>

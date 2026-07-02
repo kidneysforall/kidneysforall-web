@@ -80,43 +80,40 @@
 
     <script type="module" src="./js/i18n.js"></script>
     <script type="module">
-        import { APP_CONFIG } from './js/config.js';
-
-        // Localized simulator logic replacing broken server/API dependencies
-        document.getElementById('volunteerRegForm').addEventListener('submit', (e) => {
+        document.getElementById('volunteerRegForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const status = document.getElementById('statusMessage');
             status.style.color = "#475569";
-            status.innerText = "...";
+            status.innerText = "Transmitting capability profile configurations...";
+
+            const formData = {
+                docType: "volunteer",
+                fullName: document.getElementById('volunteer-name').value.trim(),
+                email: document.getElementById('volunteer-email').value.trim(),
+                phone: document.getElementById('volunteer-phone').value.trim(),
+                message: document.getElementById('roleInterest').value
+            };
 
             try {
-                // Generate tracking ID
-                const generatedId = 'vol_' + Math.random().toString(36).substring(2, 11);
-                
-                // Assemble simulation data model
-                const submission = {
-                    id: generatedId,
-                    docType: "volunteer",
-                    fullName: document.getElementById('volunteer-name').value.trim(),
-                    email: document.getElementById('volunteer-email').value.trim(),
-                    phone: document.getElementById('volunteer-phone').value.trim(),
-                    message: `Capability Track: ${document.getElementById('roleInterest').value}`,
-                    status: "Active",
-                    timestamp: new Date().toISOString()
-                };
+                // Connect directly to unified Azure SWA proxy api runtime routing
+                const response = await fetch('/api/submitForm', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
 
-                // Store natively in browser cache to sidestep external infrastructure errors 
-                const existingSubmissions = JSON.parse(localStorage.getItem('local_volunteers') || '[]');
-                existingSubmissions.push(submission);
-                localStorage.setItem('local_volunteers', JSON.stringify(existingSubmissions));
-
-                // Instantly feedback a localized visual success notice
-                status.style.color = "#0d9488";
-                status.innerText = "✓ Verified & Logged.";
-                document.getElementById('volunteerRegForm').reset();
+                const result = await response.json();
+                if (response.ok) {
+                    status.style.color = "#0d9488";
+                    status.innerText = "✓ Verified & Logged.";
+                    document.getElementById('volunteerRegForm').reset();
+                } else {
+                    status.style.color = "#b91c1c";
+                    status.innerText = `Rejected: ${result.error || 'Unknown API issue.'}`;
+                }
             } catch (err) {
                 status.style.color = "#b91c1c";
-                status.innerText = "Connection Error.";
+                status.innerText = "Network failure connecting to backend service.";
             }
         });
 
