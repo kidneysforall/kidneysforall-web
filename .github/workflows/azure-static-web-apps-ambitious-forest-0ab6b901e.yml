@@ -40,10 +40,10 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/frontend"   # Tells Azure where your index.html lives
-          api_location: "/api"        # Tells Azure where your serverless backend lives
+          app_location: "frontend"   # Tells Azure where your index.html lives
+          api_location: "api"        # Tells Azure where your serverless backend lives
           output_location: ""         # Leave this empty since we are using pure, unbuilt HTML/JS
-          skip_app_build: false
+          skip_app_build: true
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
 
