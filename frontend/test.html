@@ -3,36 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure SWA Reader</title>
+    <title>Cosmos DB Datagrid Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen p-6 md:p-12">
 
-    <h1>Cosmos DB Items via Serverless API</h1>
-    <button id="load-btn">Fetch Data Securely</button>
-    
-    <div id="output" style="margin-top: 20px; white-space: pre-wrap; font-family: monospace;"></div>
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between border-b border-gray-200 pb-6 mb-8">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Data Management Portal</h1>
+                <p class="mt-2 text-sm text-gray-600">Secure live stream from serverless Cosmos DB cluster.</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <button id="load-btn" class="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    Refresh Grid Data
+                </button>
+            </div>
+        </div>
+
+        <div id="status-panel" class="hidden mb-6 p-4 rounded-md text-sm"></div>
+
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-lg bg-white">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Name</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Email / Contact</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Classification</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Status Details</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Message / Attributes</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grid-body" class="divide-y divide-gray-200 bg-white">
+                        <tr>
+                            <td colspan="6" class="py-12 text-center text-sm text-gray-500 italic">
+                                No data loaded. Click 'Refresh Grid Data' to fetch.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.getElementById('load-btn').addEventListener('click', async () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.textContent = "Requesting data via secure backend API...";
+            const gridBody = document.getElementById('grid-body');
+            const statusPanel = document.getElementById('status-panel');
+            
+            // Show Loading State
+            statusPanel.className = "mb-6 p-4 rounded-md text-sm bg-amber-50 text-amber-800 border border-amber-200 block animate-pulse";
+            statusPanel.textContent = "Connecting to backend API endpoints and parsing collection rows...";
 
             try {
-                // SWA maps this automatically to your Azure function
                 const response = await fetch('/api/GetCosmosData');
+                if (!response.ok) throw new Error(`HTTP network error: status code ${response.status}`);
                 
-                if (!response.ok) {
-                    const errText = await response.text();
-                    throw new Error(errText || `HTTP status ${response.status}`);
+                const items = await response.json();
+                
+                // If container returned empty array
+                if (items.length === 0) {
+                    gridBody.innerHTML = `<tr><td colspan="6" class="py-12 text-center text-sm text-gray-500">No matching items found inside the Cosmos container.</td></tr>`;
+                    showStatus("Collection parsed completely, but container is completely empty.", "info");
+                    return;
                 }
+
+                // Generate Datagrid Markup
+                let tableRowsHtml = "";
                 
-                const data = await response.json();
-                outputDiv.textContent = JSON.stringify(data, null, 2);
+                items.forEach(item => {
+                    // Normalize Polymorphic Schema Differences
+                    const displayName = item.fullName || `${item.firstName || ''} ${item.lastName || ''}`.trim() || 'Unknown Entity';
+                    const email = item.email || 'N/A';
+                    const phone = item.phone && item.phone !== 'Not Provided' ? ` • ${item.phone}` : '';
+                    
+                    // Standardize Type / Role Classifications
+                    const categorization = (item.docType || item.role || 'Document').toUpperCase();
+                    
+                    // Pick status/badge styling colors dynamically
+                    let badgeClass = "bg-gray-100 text-gray-800";
+                    if (item.status === "Active" || item.role === "donor") badgeClass = "bg-green-100 text-green-800";
+                    if (item.status === "Pending" || item.role === "recipient") badgeClass = "bg-blue-100 text-blue-800";
+
+                    const statusVal = item.status || item.bloodType || 'N/A';
+                    const detailMessage = item.message || `System Record ID: ${item.id.substring(0,8)}...`;
+                    
+                    // Parse Timestamp formatting safely
+                    const rawDate = item.timestamp || item.createdAt || '';
+                    const localizedDate = rawDate ? new Date(rawDate).toLocaleString() : 'N/A';
+
+                    tableRowsHtml += `
+                        <tr class="hover:bg-gray-50 transition duration-150">
+                            <td class="whitespace-nowrap py-4 pl-6 pr-3 text-sm font-medium text-gray-900">${displayName}</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${email}<span class="text-xs text-gray-400">${phone}</span></td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">${categorization}</span>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${badgeClass}">${statusVal}</span>
+                            </td>
+                            <td class="px-3 py-4 text-sm text-gray-500 max-w-xs truncate" title="${detailMessage}">${detailMessage}</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-400">${localizedDate}</td>
+                        </tr>
+                    `;
+                });
+
+                gridBody.innerHTML = tableRowsHtml;
+                showStatus(`Successfully pulled and rendered ${items.length} records.`, "success");
 
             } catch (error) {
-                outputDiv.textContent = `Error: ${error.message}`;
+                console.error("Grid assembly pipeline crash:", error);
+                gridBody.innerHTML = `<tr><td colspan="6" class="py-12 text-center text-sm text-red-600 font-medium">Failed to parse remote server stream.</td></tr>`;
+                showStatus(`Fetch failure: ${error.message}`, "error");
             }
         });
+
+        function showStatus(text, type) {
+            const statusPanel = document.getElementById('status-panel');
+            statusPanel.className = "mb-6 p-4 rounded-md text-sm border block";
+            
+            if (type === "success") {
+                statusPanel.classList.add("bg-green-50", "text-green-800", "border-green-200");
+            } else if (type === "error") {
+                statusPanel.classList.add("bg-red-50", "text-red-800", "border-red-200");
+            } else {
+                statusPanel.classList.add("bg-blue-50", "text-blue-800", "border-blue-200");
+            }
+            statusPanel.textContent = text;
+        }
     </script>
 </body>
 </html>
