@@ -11,7 +11,7 @@
         .header-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
         .back-home { color: #0d9488; text-decoration: none; font-weight: 500; }
         .lang-selectors { display: flex; gap: 6px; font-size: 14px; align-items: center; }
-        .lang-switch { cursor: pointer; color: #64748b; text-decoration: none; font-weight: bold; }
+        .lang-switch { cursor: pointer; color: #64748b; text-decoration: none; font-weight: bold; background: none; border: none; font: inherit; padding: 0; }
         .lang-switch:hover, .lang-switch.active { color: #0d9488; text-decoration: underline; }
         .form-card { background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; border-top: 4px solid #f59e0b; }
         h1 { font-size: 28px; color: #1e293b; margin-bottom: 10px; }
@@ -20,87 +20,85 @@
         label { display: block; margin-bottom: 8px; font-weight: 600; color: #334155; font-size: 14px; }
         input[type="text"], input[type="email"], select { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 16px; color: #334155; background-color: #ffffff; }
         input:focus, select:focus { border-color: #f59e0b; outline: none; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15); }
-        button { background-color: #f59e0b; color: #1e293b; border: none; padding: 14px 20px; font-size: 16px; font-weight: bold; border-radius: 25px; cursor: pointer; width: 100%; margin-top: 10px; transition: background-color 0.3s; }
-        button:hover { background-color: #d97706; }
+        button[type="submit"] { background-color: #f59e0b; color: #1e293b; border: none; padding: 14px 20px; font-size: 16px; font-weight: bold; border-radius: 25px; cursor: pointer; width: 100%; margin-top: 10px; transition: background-color 0.3s; }
+        button[type="submit"]:hover { background-color: #d97706; }
         #statusMessage { margin-top: 20px; font-weight: bold; text-align: center; font-size: 15px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-wrap">
-            <a href="index.html" class="back-home" data-i18n="back_home">← Back to Homepage</a>[cite: 5]
+            <a href="index.html" class="back-home" data-i18n="back_home">← Back to Homepage</a>
             <div class="lang-selectors">
-                <button class="lang-switch" data-lang="en" style="background:none; border:none; font:inherit; padding:0;">EN</button>[cite: 5]
-                <span>|</span>[cite: 5]
-                <button class="lang-switch" data-lang="es" style="background:none; border:none; font:inherit; padding:0;">ES</button>[cite: 5]
+                <button class="lang-switch" data-lang="en">EN</button>
+                <span>|</span>
+                <button class="lang-switch" data-lang="es">ES</button>
             </div>
         </div>
         <div class="form-card">
-            <h1 data-i18n="circle_title">Join the Support Circle</h1>[cite: 5]
-            <p class="intro" data-i18n="circle_subtitle">Lend your time, your voice, or your skills to ensure no kidney patient has to navigate chronic illness alone.</p>[cite: 5]
-            <form id="circleForm">[cite: 5]
+            <h1 data-i18n="circle_title">Join the Support Circle</h1>
+            <p class="intro" data-i18n="circle_subtitle">Lend your time, your voice, or your skills to ensure no kidney patient has to navigate chronic illness alone.</p>
+            <form id="circleForm">
                 <div class="form-group">
-                    <label for="fullName" data-i18n="lbl_fullname">Full Name</label>[cite: 5]
-                    <input type="text" id="fullName" placeholder="Your name" required>[cite: 5]
+                    <label for="fullName" data-i18n="lbl_fullname">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Your name" required>
                 </div>
                 <div class="form-group">
-                    <label for="email" data-i18n="lbl_email">Email Address</label>[cite: 5]
-                    <input type="email" id="email" placeholder="name@example.com" required>[cite: 5]
+                    <label for="email" data-i18n="lbl_email">Email Address</label>
+                    <input type="email" id="email" placeholder="name@example.com" required>
                 </div>
                 <div class="form-group">
-                    <label for="roleInterest" data-i18n="lbl_interest">Area of Interest</label>[cite: 5]
-                    <select id="roleInterest" required>[cite: 5]
-                        <option value="" disabled selected>Select an option...</option>[cite: 5]
-                        <option value="companion" data-i18n="opt_vol_comp">Volunteer Treatment Companion</option>[cite: 5]
-                        <option value="advocate" data-i18n="opt_grass_adv">Grassroots Advocacy / Awareness Builder</option>[cite: 5]
-                        <option value="post-op-helper" data-i18n="opt_post_pod">Localized Post-Op Support Pods</option>[cite: 5]
+                    <label for="roleInterest" data-i18n="lbl_interest">Area of Interest</label>
+                    <select id="roleInterest" required>
+                        <option value="" disabled selected>Select an option...</option>
+                        <option value="companion" data-i18n="opt_vol_comp">Volunteer Treatment Companion</option>
+                        <option value="advocate" data-i18n="opt_grass_adv">Grassroots Advocacy / Awareness Builder</option>
+                        <option value="post-op-helper" data-i18n="opt_post_pod">Localized Post-Op Support Pods</option>
                     </select>
                 </div>
-                <button type="submit" data-i18n="btn_submit_circle">Submit Circle Registration</button>[cite: 5]
+                <button type="submit" data-i18n="btn_submit_circle">Submit Circle Registration</button>
             </form>
-            <p id="statusMessage"></p>[cite: 5]
+            <p id="statusMessage"></p>
         </div>
     </div>
 
-    <!-- Core Translation Module Loader -->
-    <script type="module" src="./js/i18n.js"></script>[cite: 5]
+    <script type="module" src="./js/i18n.js"></script>
     <script type="module">
-        import { APP_CONFIG } from './js/config.js';[cite: 5]
-
         // Submit form data collection handler
-        document.getElementById('circleForm').addEventListener('submit', async (e) => {[cite: 5]
-            e.preventDefault();[cite: 5]
-            const statusMessage = document.getElementById('statusMessage');[cite: 5]
-            statusMessage.style.color = "#475569";[cite: 5]
-            statusMessage.innerText = "...";[cite: 5]
+        document.getElementById('circleForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.style.color = "#475569";
+            statusMessage.innerText = "Submitting registration details...";
 
             const formData = {
-                docType: "submission",[cite: 5]
-                fullName: document.getElementById('fullName').value.trim(),[cite: 5]
-                email: document.getElementById('email').value.trim(), // Fixed mapping selector typo[cite: 5]
-                phone: "Not Provided",[cite: 5]
-                message: `Registered Track Interest: ${document.getElementById('roleInterest').value}`[cite: 5]
+                docType: "submission",
+                fullName: document.getElementById('fullName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: "Not Provided",
+                message: `Registered Track Interest: ${document.getElementById('roleInterest').value}`
             };
 
             try {
-                const response = await fetch(`${APP_CONFIG.BASE_URL}/api/submitForm`, {[cite: 5]
-                    method: 'POST',[cite: 5]
-                    headers: { 'Content-Type': 'application/json' },[cite: 5]
-                    body: JSON.stringify(formData)[cite: 5]
+                // Simplified relative API pathway optimized for Azure Static Web Apps proxy routing
+                const response = await fetch('/api/submitForm', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
                 });
 
-                const result = await response.json();[cite: 5]
-                if (response.ok) {[cite: 5]
-                    statusMessage.style.color = "#0d9488";[cite: 5]
-                    statusMessage.innerText = "✓ Success! Registration Captured.";[cite: 5]
-                    document.getElementById('circleForm').reset();[cite: 5]
+                const result = await response.json();
+                if (response.ok) {
+                    statusMessage.style.color = "#0d9488";
+                    statusMessage.innerText = "✓ Success! Registration Captured.";
+                    document.getElementById('circleForm').reset();
                 } else {
-                    statusMessage.style.color = "#b91c1c";[cite: 5]
-                    statusMessage.innerText = `Rejected: ${result.error || 'Unknown api issue.'}`;[cite: 5]
+                    statusMessage.style.color = "#b91c1c";
+                    statusMessage.innerText = `Rejected: ${result.error || 'Unknown API issue.'}`;
                 }
             } catch (err) {
-                statusMessage.style.color = "#b91c1c";[cite: 5]
-                statusMessage.innerText = "Network failure.";[cite: 5]
+                statusMessage.style.color = "#b91c1c";
+                statusMessage.innerText = "Network failure connecting to backend service.";
             }
         });
 
